@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
       },
       subtitle: {
         fontSize: 16,
-        color: 'red',
+        color: 'white',
       },
       image: {
         width: '100%',
