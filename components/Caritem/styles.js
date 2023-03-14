@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         height: '100%',
       },
       titles: {
-        marginTop: '30%',
+        marginTop: '15%',
         width: '100%',
         allignItems: 'center',
       },
@@ -18,13 +18,27 @@ const styles = StyleSheet.create({
       subtitle: {
         fontSize: 16,
         color: 'white',
+        marginLeft: 10,
+      },
+      plate: {
+        fontSize: 16,
+        color: 'grey',
       },
       image: {
         width: '100%',
         height: '100%',
         resizeMode: 'cover',
         position: 'absolute',
-      },  
+      },
+      divider: {
+        borderBottomColor: 'white',
+        borderBottomWidth: StyleSheet.hairlineWeidth,
+      },
+      refreshButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '20',
+      }
 });
 
 export default styles;
