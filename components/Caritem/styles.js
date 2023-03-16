@@ -32,12 +32,12 @@ const styles = StyleSheet.create({
       },
       divider: {
         borderBottomColor: 'white',
-        borderBottomWidth: StyleSheet.hairlineWeidth,
+        borderBottomWidth: StyleSheet.hairlineWidth,
       },
       refreshButton: {
         flexDirection: 'row',
         alignItems: 'center',
-        width: '20',
+        width: '20%',
       }
 });
 
