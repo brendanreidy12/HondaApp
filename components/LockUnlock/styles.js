@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         color: 'white',
         textTransform: 'uppercase',
         justifyContent: 'center',
-        allignItems: 'center',
+        alignItems: 'center',
       },
 });
 
