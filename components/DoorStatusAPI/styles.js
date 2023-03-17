@@ -7,12 +7,12 @@ const styles = StyleSheet.create({
         flex: 1,
       },
       button: {
-        backgroundColor: 'gray',
+        backgroundColor: 'blue',
         height: 100,
         width: 100,
         justifyContent: 'center',
         borderRadius: 50,
-        marginVertical: 150,
+        marginVertical: 200,
         marginHorizontal: 35,
       },
       text: {

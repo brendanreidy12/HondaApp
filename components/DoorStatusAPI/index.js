@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Text, View } from 'react-native';
 import axios from 'axios';
-import styles from './styles';
+import styles from './styles.js';
 
+//Use localhost instead of 10.0.2.2 for iOS
+// Base URL not yet set up, change values manually instead
+const baseURL = 'http://localhost:3000'
 
 export const LockScreen = () => {
     const [locked, setLocked] = useState(null);
   
     useEffect(() => {
-      axios.get('http://10.0.2.2:3000/lockstatus')
+      axios.get('10.0.2.2/lockstatus')
         .then(response => {
           setLocked(response.data.locked);
         })
@@ -18,7 +21,7 @@ export const LockScreen = () => {
     }, );
   
     const handleLockPress = () => {
-      axios.post('http://10.0.2.2:3000/lock')
+      axios.post('$10.0.2.2/lock')
         .then(response => {
           setLocked(response.data.locked);
         })
@@ -28,7 +31,7 @@ export const LockScreen = () => {
     };
   
     const handleUnlockPress = () => {
-      axios.post('http://10.0.2.2:3000/unlock')
+      axios.post('10.0.2.2/unlock')
         .then(response => {
           setLocked(response.data.locked);
         })
@@ -47,7 +50,7 @@ export const LockScreen = () => {
   
     return (
       <View>
-        <Text>The car is {locked ? 'locked' : 'unlocked'}</Text>
+        <Text style={styles.text}>The car is {locked ? 'locked' : 'unlocked'}</Text>
         <Button
         style={styles.button}
         title={locked ? 'Unlock' : 'Lock'}
