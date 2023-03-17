@@ -3,24 +3,25 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: '100%',
+        padding: 10,
         flex: 1,
       },
-      image: {
-        backgroundColor: 'white',
-        height: 150,
-        width: 150,
+      button: {
+        backgroundColor: 'gray',
+        height: 100,
+        width: 100,
         justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 75,
-        marginHorizontal: 130,
-        marginVertical: -100,
+        borderRadius: 50,
+        marginVertical: 150,
+        marginHorizontal: 35,
       },
       text: {
         fontSize: 12,
         fontWeight: '500',
         color: 'white',
         textTransform: 'uppercase',
+        justifyContent: 'center',
+        alignItems: 'center',
       },
 });
 

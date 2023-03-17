@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
-import {View, Text, ImageBackground, Divider, Flex, Button} from 'react-native';
-import styles from './styles';
+OOOimpAAort {View, Text, ImageBackground, Divider, Flex, Button} from 'react-native';
+impAABort styles from './styles';
 import StyledButton from "../LockUnlock";
 import CenterImage from "../CenterCar";
-import { LockScreen } from "../DoorStatusAPI";
+import { LockButton, LockStatus } from "../DoorStatusAPI";
+
+
+export function Door() {
+  const [locked, setLocked] = useState(true); // set initial state of car to locked
+
+  const handlePress = (newLocked) => {
+    setLocked(newLocked);
+  };
+}
 
 const CarItem = (props) => {
     return (
@@ -22,7 +31,8 @@ const CarItem = (props) => {
           </View>
         </View>
 
-        <LockScreen />
+        <LockStatus locked={locked} />
+        <LockButton locked={locked} onPress={handlePress} />
 
         <StyledButton />
 
@@ -31,5 +41,6 @@ const CarItem = (props) => {
       </View>
     );
 };
+
 
 export default CarItem;
