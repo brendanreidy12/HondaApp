@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, Text, View, Pressable } from 'react-native';
 import axios from 'axios';
 import styles from './styles.js';
 
@@ -49,7 +49,7 @@ export const LockScreen = () => {
     }
   
     return (
-      <View>
+      <View style={styles.buttoncontainer}>
         <Text style={styles.text}>The car is {locked ? 'locked' : 'unlocked'}</Text>
         <Button
         style={styles.button}
