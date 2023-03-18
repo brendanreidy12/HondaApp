@@ -11,7 +11,7 @@ export const LockScreen = () => {
     const [locked, setLocked] = useState(null);
   
     useEffect(() => {
-      axios.get('10.0.2.2/lockstatus')
+      axios.get('http://10.0.2.2:3000/lockstatus')
         .then(response => {
           setLocked(response.data.locked);
         })
@@ -21,7 +21,7 @@ export const LockScreen = () => {
     }, );
   
     const handleLockPress = () => {
-      axios.post('$10.0.2.2/lock')
+      axios.post('http://10.0.2.2:3000/lock')
         .then(response => {
           setLocked(response.data.locked);
         })
@@ -31,7 +31,7 @@ export const LockScreen = () => {
     };
   
     const handleUnlockPress = () => {
-      axios.post('10.0.2.2/unlock')
+      axios.post('http://10.0.2.2:3000/unlock')
         .then(response => {
           setLocked(response.data.locked);
         })
