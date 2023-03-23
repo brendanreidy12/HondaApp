@@ -50,8 +50,9 @@ export const LockScreen = () => {
   
     return (
       <View style={styles.buttoncontainer}>
-        <Text style={styles.text}>The car is {locked ? 'locked' : 'unlocked'}</Text>
+        <Text accessibilityLabel='lock-unlock-status' style={styles.text}>The car is {locked ? 'locked' : 'unlocked'}</Text>
         <Button
+        accessibilityLabel='lock-unlock-button'
         style={styles.button}
         title={locked ? 'Unlock' : 'Lock'}
         onPress={locked ? handleUnlockPress : handleLockPress} />

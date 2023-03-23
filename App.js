@@ -4,7 +4,7 @@ import CarItem from './components/Caritem';
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <View accessibilityLabel='app-root' style={styles.container}>
       
       <CarItem/>
       <StatusBar style="auto"/>

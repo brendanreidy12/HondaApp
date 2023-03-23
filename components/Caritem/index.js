@@ -14,11 +14,11 @@ const CarItem = (props) => {
       />
 
         <View style={styles.titles}>
-          <Text style={styles.plate}>RE20 WTL</Text>
-          <Text style={styles.title}>Honda e</Text>
+          <Text accessibilityLabel='plate' style={styles.plate}>RE20 WTL</Text>
+          <Text accessibilityLabel='Model' style={styles.title}>Honda e</Text>
           <View style={styles.refreshButton}>
-            <Button title="Refresh" />
-            <Text style={styles.subtitle}>Updated 45s ago</Text>
+            <Button accessibilityLabel='refresh' title="Refresh" />
+            <Text accessibilityLabel='last-updated' style={styles.subtitle}>Updated 45s ago</Text>
           </View>
         </View>
 

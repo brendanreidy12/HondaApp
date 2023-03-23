@@ -6,6 +6,7 @@ const CenterImage = (props) => {
     return (
         <View style={styles.container}>
             <Image
+                accessibilityLabel='vehicle-image'
                 style={styles.image}
                 source={require('../../assets/Images/hondae.jpg')}
             />
