@@ -1,19 +1,18 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    container: {
+    buttoncontainer: {
         width: '100%',
         padding: 10,
-        flex: 1,
+        flexDirection: 'row',
       },
       button: {
-        backgroundColor: 'gray',
-        height: 100,
-        width: 100,
-        justifyContent: 'center',
-        borderRadius: 50,
-        marginVertical: 150,
-        marginHorizontal: 35,
+        backgroundColor: 'blue',
+        height: 30,
+        width: 30,
+        alignItems: 'center',
+        flexDirection: 'row',
+        borderRadius: 30,
       },
       text: {
         fontSize: 12,
