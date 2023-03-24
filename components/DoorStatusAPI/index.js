@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Text, View, Pressable } from 'react-native';
+import { Button, Text, View, Pressable, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import styles from './styles.js';
 
@@ -49,13 +49,20 @@ export const LockScreen = () => {
     }
   
     return (
-      <View style={styles.buttoncontainer}>
-        <Text accessibilityLabel='lock-unlock-status' style={styles.text}>The car is {locked ? 'locked' : 'unlocked'}</Text>
-        <Button
-        accessibilityLabel='lock-unlock-button'
-        style={styles.button}
-        title={locked ? 'Unlock' : 'Lock'}
-        onPress={locked ? handleUnlockPress : handleLockPress} />
+      <View style={styles.buttonContainer}>
+        <Text accessibilityLabel="lock-unlock-status" style={styles.text}>
+          The car is {locked ? 'locked' : 'unlocked'}
+        </Text>
+        <TouchableOpacity
+          accessibilityLabel="lock-unlock-button"
+          style={styles.button}
+          onPress={locked ? handleUnlockPress : handleLockPress}
+        >
+          <Text 
+            accessibilityLabel='lock-unlock-button-status'
+            style={styles.buttonText}>{locked ? 'Unlock' : 'Lock'}
+          </Text>
+        </TouchableOpacity>
       </View>
     );
 };
