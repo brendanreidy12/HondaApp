@@ -8,5 +8,7 @@ Start API Server: In ./HondaApp, run node 'node ./components/DoorStatusAPI/lockU
 Also requires:
 
 npm install express
+
 npm install axios
 
+Now working with Appium on Fedora Workstation with Android 12.
