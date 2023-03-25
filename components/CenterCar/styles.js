@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 75,
-        marginHorizontal: 130,
-        marginVertical: -100,
+        marginHorizontal: 125,
+        marginVertical: 170,
       },
       text: {
         fontSize: 12,

@@ -1,35 +1,30 @@
-import React, { useState } from 'react';
-import {View, Text, ImageBackground, Divider, Flex, Button} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+// Caritem/index.js
+
+import React from 'react';
+import { ImageBackground, Text, View, Pressable } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome'; // Add this line
 import styles from './styles';
-import CenterImage from "../CenterCar";
-import { LockScreen } from "../DoorStatusAPI";
-import { ClimateControl } from '../ClimateAPI';
+import CenterImage from '../CenterCar';
 
-const CarItem = (props) => {
+const CarItem = ({ navigation }) => {
   return (
-      <View style={styles.carContainer}>
-      
-      <ImageBackground source={require('../../assets/Images/gradient.jpg')}
-      style={styles.image}
-    />
-
-      <View style={styles.titles}>
-        <Text accessibilityLabel='plate' style={styles.plate}>RE20 WTL</Text>
-        <Text accessibilityLabel='Model' style={styles.title}>Honda e</Text>
-        <View style={styles.refreshButton}>
-          <Button accessibilityLabel='refresh' title="Refresh" />
-          <Text accessibilityLabel='last-updated' style={styles.subtitle}>Updated 45s ago</Text>
-        </View>
+    <View style={styles.carContainer}>
+      {/* ... */}
+      <View style={styles.buttonContainer}>
+        <Pressable
+          style={styles.circularButton}
+          onPress={() => navigation.navigate('ClimateControl')}
+        >
+          <Icon name="snowflake-o" size={30} color="white" />
+        </Pressable>
+        <Pressable
+          style={styles.circularButton}
+          onPress={() => navigation.navigate('LockScreen')}
+        >
+          <Icon name="lock" size={30} color="white" />
+        </Pressable>
       </View>
-
-      <ClimateControl />
-
-      <LockScreen />
-
       <CenterImage />
-
     </View>
   );
 };

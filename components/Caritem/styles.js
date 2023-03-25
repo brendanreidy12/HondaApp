@@ -24,12 +24,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'grey',
       },
-      image: {
-        width: '100%',
-        height: '100%',
-        resizeMode: 'cover',
-        position: 'absolute',
-      },
       divider: {
         borderBottomColor: 'white',
         borderBottomWidth: StyleSheet.hairlineWidth,
@@ -38,7 +32,25 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         width: '20%',
-      }
+      },
+      buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        width: '100%',
+        marginTop: 80,
+      },
+      circularButton: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        borderRadius: 50,
+        width: 100,
+        height: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      buttonText: {
+        color: 'white',
+        fontSize: 16,
+      },
 });
 
 export default styles;
