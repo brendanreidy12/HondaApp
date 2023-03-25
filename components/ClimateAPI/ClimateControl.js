@@ -6,16 +6,16 @@ import styles from './styles.js';
 import CustomBackground from '../CustomBackground/CustomBackground.js';
 
 export default function ClimateControl() {
-  const [temperature, setTemperature] = useState(null);
-  const [climateTimeRemaining, setClimateTimeRemaining] = useState(null);
+  const [temperature, setTemperature] = useState(16);
+  const [climateTimeRemaining, setClimateTimeRemaining] = useState(20);
   const [climateOn, setClimateOn] = useState(false);
 
   useEffect(() => {
     axios.get('http://10.0.2.2:3000/climateStatus')
       .then(response => {
         setClimateOn(response.data.climateOn);
-        setTemperature(response.data.temperature);
-        setClimateTimeRemaining(response.data.climateTimeRemaining);
+        setTemperature(response.data.temperature || 16);
+        setClimateTimeRemaining(response.data.climateTimeRemaining || 20);
       })
       .catch(error => {
         console.log(error);
@@ -64,7 +64,7 @@ export default function ClimateControl() {
             <Text style={styles.text}>Temperature: {temperature}°C</Text>
             <Text style={styles.text}>Climate Time Remaining: {climateTimeRemaining} min</Text>
             <TouchableOpacity
-              style={styles.stopButton}
+              style={styles.submitButton}
               onPress={handleClimateStop}
             >
               <Text style={styles.buttonText}>Stop Climate</Text>
@@ -83,24 +83,29 @@ export default function ClimateControl() {
               ))}
             </Picker>
 
-            <Text style={styles.text}>Climate Time Remaining</Text>
+            <Text style={styles.text}>Preconditioning Climate Time</Text>
             <View style={styles.buttonContainer}>
               {([10, 20, 30]).map((time) => (
                 <TouchableOpacity
                   key={time}
-                  style={styles.button}
+                  style={[
+                    styles.button,
+                    climateTimeRemaining === time ? styles.activeButton : null,
+                  ]}
                   onPress={() => setClimateTimeRemaining(time)}
                 >
                   <Text style={styles.buttonText}>{time} min</Text>
                 </TouchableOpacity>
               ))}
             </View>
-            <TouchableOpacity
-              style={styles.submitButton}
-              onPress={handleSubmit}
-            >
-              <Text style={styles.buttonText}>Submit</Text>
-            </TouchableOpacity>
+            <View style={styles.submitButtonContainer}>
+              <TouchableOpacity
+                style={styles.submitButton}
+                onPress={handleSubmit}
+              >
+                <Text style={styles.buttonText}>Submit</Text>
+              </TouchableOpacity>
+            </View>
           </>
         )}
       </View>

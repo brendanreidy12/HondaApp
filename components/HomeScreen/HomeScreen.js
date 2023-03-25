@@ -7,7 +7,7 @@ const HomeScreen = ({ navigation }) => {
   const [locked, setLocked] = useState(true);
   const [climateOn, setClimateOn] = useState(false);
 
-  useEffect(() => {
+  const fetchLockStatus = () => {
     axios.get('http://10.0.2.2:3000/lockstatus')
       .then(response => {
         setLocked(response.data.locked);
@@ -15,7 +15,9 @@ const HomeScreen = ({ navigation }) => {
       .catch(error => {
         console.log(error);
       });
+  };
 
+  const fetchClimateStatus = () => {
     axios.get('http://10.0.2.2:3000/climatestatus')
       .then(response => {
         setClimateOn(response.data.climateOn);
@@ -23,12 +25,24 @@ const HomeScreen = ({ navigation }) => {
       .catch(error => {
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    fetchLockStatus();
+    fetchClimateStatus();
   }, []);
 
   return (
-  <CustomBackground>
-    <CarItem navigation={navigation} locked={locked} climateOn={climateOn} />
-  </CustomBackground>
-)};
+    <CustomBackground>
+      <CarItem
+        navigation={navigation}
+        locked={locked}
+        climateOn={climateOn}
+        fetchLockStatus={fetchLockStatus}
+        fetchClimateStatus={fetchClimateStatus}
+      />
+    </CustomBackground>
+  );
+};
 
 export default HomeScreen;

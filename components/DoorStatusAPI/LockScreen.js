@@ -44,17 +44,19 @@ export default function LockScreen() {
     if (locked === null) {
       return (
         <View>
-          <Text>Loading...</Text>
+          <Text styles={styles.text}>Loading...</Text>
         </View>
       );
     }
   
     return (
       <CustomBackground>
-        <View style={styles.buttonContainer}>
+        <View style={styles.statusContainer}>
           <Text accessibilityLabel="lock-unlock-status" style={styles.text}>
             The car is {locked ? 'locked' : 'unlocked'}
           </Text>
+        </View>
+        <View style={styles.buttonContainer}>
           <TouchableOpacity
             accessibilityLabel="lock-unlock-button"
             style={styles.button}
@@ -62,7 +64,7 @@ export default function LockScreen() {
           >
             <Text 
               accessibilityLabel='lock-unlock-button-status'
-              style={styles.buttonText}>{locked ? 'Unlock' : 'Lock'}
+              style={styles.buttonText}>Press to {locked ? 'Unlock' : 'Lock'}
             </Text>
           </TouchableOpacity>
         </View>

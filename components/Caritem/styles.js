@@ -28,16 +28,25 @@ const styles = StyleSheet.create({
         borderBottomColor: 'white',
         borderBottomWidth: StyleSheet.hairlineWidth,
       },
-      refreshButton: {
+      topContainer: {
         flexDirection: 'row',
-        alignItems: 'center',
-        width: '20%',
+        width: '100%',
+        marginTop: 80,
+        marginLeft: 10,
       },
-      buttonContainer: {
+      refreshButton: {
+        backgroundColor: 'grey',
+        borderRadius: 50,
+        width: 30,
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      functionButtonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         width: '100%',
-        marginTop: 80,
+        marginVertical: 100,
       },
       circularButton: {
         backgroundColor: 'grey',

@@ -1,5 +1,3 @@
-// Caritem/index.js
-
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -7,40 +5,60 @@ import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import CenterImage from '../CenterCar';
 
-const CarItem = ({ locked, climateOn }) => {
+const CarItem = ({ locked, climateOn, fetchLockStatus, fetchClimateStatus }) => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.carContainer}>
-      {/* ... */}
-      <View style={styles.buttonContainer}>
+      <View style={styles.topContainer}>
+        <TouchableOpacity
+          style={[
+            styles.refreshButton
+          ]}
+          onPress={() => {
+            fetchLockStatus();
+            fetchClimateStatus();
+          }}
+          accessible={true}
+          accessibilityLabel="refresh-button"
+          accessibilityRole="button"
+        >
+          <Icon
+            name="rotate-right"
+            size={20}
+          />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.functionButtonContainer}>
         <TouchableOpacity
           style={[
             styles.circularButton,
-            // Set the background color to white if climateOn is true, otherwise use the default color
             climateOn ? { backgroundColor: 'white', borderColor: 'black', borderWidth: 1 } : null,
           ]}
           onPress={() => navigation.navigate('ClimateControl')}
+          accessible={true}
+          accessibilityLabel="climate-button"
+          accessibilityRole="button"
         >
           <Icon
             name="snowflake-o"
-            size={20}
-            // Set the icon color to red if climateControlStatus is true, otherwise use the default color
+            size={60}
             color={climateOn ? 'red' : 'black'}
           />
         </TouchableOpacity>
         <TouchableOpacity
           style={[
             styles.circularButton,
-            // Set the background color to white if locked is false, otherwise use the default color
             !locked ? { backgroundColor: 'white', borderColor: 'black', borderWidth: 1 } : null,
           ]}
           onPress={() => navigation.navigate('LockScreen')}
+          accessible={true}
+          accessibilityLabel="lock-button"
+          accessibilityRole="button"
         >
           <Icon
             name={locked ? 'lock' : 'unlock'}
-            size={20}
-            // Set the icon color to red if locked is false, otherwise use the default color
+            size={60}
             color={!locked ? 'red' : 'black'}
           />
         </TouchableOpacity>

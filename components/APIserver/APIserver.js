@@ -72,7 +72,7 @@ setInterval(() => {
     }
   }
   //60*1000 for 10 minutes, 60*100 for 1 minute, allows for debugging stop functionality
-}, 60 * 1000);
+}, 60 * 100);
 
 // ...
 
