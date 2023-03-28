@@ -44,7 +44,7 @@ export default function LockScreen() {
     if (locked === null) {
       return (
         <View>
-          <Text styles={styles.text}>Loading...</Text>
+          <Text accessibilityLabel='loading-status' styles={styles.text}>Loading...</Text>
         </View>
       );
     }

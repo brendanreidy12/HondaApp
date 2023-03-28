@@ -1,5 +1,3 @@
-// navigation.js
-
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -70,13 +68,14 @@ const HomeStackNavigator = () => {
         >
           <Tab.Screen
             name="Home"
+            accessibilityLabel="home"
             component={HomeStackNavigator}
             options={{ headerShown: false }}
           />
-          <Tab.Screen name="Discover" component={DiscoverScreen} />
-          <Tab.Screen name="Journeys" component={JourneysScreen} />
-          <Tab.Screen name="Safety" component={SafetyScreen} />
-          <Tab.Screen name="Dashboard" component={DashboardScreen} />
+          <Tab.Screen name="Discover" accessibilityLabel="discover" component={DiscoverScreen} />
+          <Tab.Screen name="Journeys" accessibilityLabel="journeys" component={JourneysScreen} />
+          <Tab.Screen name="Safety" accessibilityLabel="safety"  component={SafetyScreen} />
+          <Tab.Screen name="Dashboard" accessibilityLabel="dashboard" component={DashboardScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     );

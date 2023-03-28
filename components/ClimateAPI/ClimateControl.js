@@ -60,10 +60,11 @@ export default function ClimateControl() {
       <View>
         {climateOn ? (
           <View>
-            <Text style={styles.text}>Climate is on</Text>
-            <Text style={styles.text}>Temperature: {temperature}°C</Text>
-            <Text style={styles.text}>Climate Time Remaining: {climateTimeRemaining} min</Text>
+            <Text accessibilityLabel='climate-status' style={styles.text}>Climate is on</Text>
+            <Text accessibilityLabel='temp-status' style={styles.text}>Temperature: {temperature}°C</Text>
+            <Text accessibilityLabel='climate-time-left' style={styles.text}>Climate Time Remaining: {climateTimeRemaining} min</Text>
             <TouchableOpacity
+              accessibilityLabel='climate-stop'
               style={styles.submitButton}
               onPress={handleClimateStop}
             >
@@ -76,6 +77,7 @@ export default function ClimateControl() {
             <Picker
               selectedValue={temperature}
               onValueChange={setTemperature}
+              accessibilityLabel="temp-picker"
               style={styles.picker}
             >
               {Array.from({ length: 14 }, (_, i) => i + 16).map((temp) => (
@@ -87,7 +89,8 @@ export default function ClimateControl() {
             <View style={styles.buttonContainer}>
               {([10, 20, 30]).map((time) => (
                 <TouchableOpacity
-                  key={time}
+                accessibilityLabel='climate-time-set'  
+                key={time}
                   style={[
                     styles.button,
                     climateTimeRemaining === time ? styles.activeButton : null,
@@ -101,6 +104,7 @@ export default function ClimateControl() {
             <View style={styles.submitButtonContainer}>
               <TouchableOpacity
                 style={styles.submitButton}
+                accessibilityLabel="climate-submit"
                 onPress={handleSubmit}
               >
                 <Text style={styles.buttonText}>Submit</Text>

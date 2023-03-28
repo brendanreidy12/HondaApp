@@ -6,11 +6,12 @@ const Article = ({ title, videoId }) => {
   return (
     <View style={styles.container}>
       <WebView
+        accessibilityLabel='discover-video'
         style={styles.video}
         javaScriptEnabled={true}
         source={{ uri: `https://www.youtube.com/embed/${videoId}` }}
       />
-      <Text style={styles.title}>{title}</Text>
+      <Text accessibilityLabel='discover-text' style={styles.title}>{title}</Text>
     </View>
   );
 };
