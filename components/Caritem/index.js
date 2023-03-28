@@ -37,7 +37,7 @@ const CarItem = ({ locked, climateOn, fetchLockStatus, fetchClimateStatus }) => 
           ]}
           onPress={() => navigation.navigate('ClimateControl')}
           accessible={true}
-          accessibilityLabel="climate-button"
+          accessibilityLabel="climate-icon-button"
           accessibilityRole="button"
         >
           <Icon
@@ -53,7 +53,7 @@ const CarItem = ({ locked, climateOn, fetchLockStatus, fetchClimateStatus }) => 
           ]}
           onPress={() => navigation.navigate('LockScreen')}
           accessible={true}
-          accessibilityLabel="lock-button"
+          accessibilityLabel="lock-icon-button"
           accessibilityRole="button"
         >
           <Icon

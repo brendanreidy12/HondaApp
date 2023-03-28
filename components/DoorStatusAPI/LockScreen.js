@@ -64,7 +64,7 @@ export default function LockScreen() {
           >
             <Text 
               accessibilityLabel='lock-unlock-button-status'
-              style={styles.buttonText}>Press to {locked ? 'Unlock' : 'Lock'}
+              style={styles.buttonText}>{locked ? 'Unlock' : 'Lock'}
             </Text>
           </TouchableOpacity>
         </View>

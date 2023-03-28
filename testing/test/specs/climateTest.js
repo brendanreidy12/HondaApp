@@ -1,6 +1,3 @@
-const assert = require('assert');
-
-
 describe('Specific element test', () => {
     it('Expo Set-up - App opened in config, this inputs project URL, opens app, and closes pop up', async () => {
         const selector = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup";
@@ -27,13 +24,43 @@ describe('Specific element test', () => {
     });
 });
 
-describe('Lock/Unlock button test', () => {
-    it('Toggles car lock/unlock twice and checks result', async () => {
+describe('Climate Control Test', () => {
+    it('Turns climate control on', async () => {
         await browser.pause(3000);
 
+        let climateIcon = await driver.$("~climate-icon-button");
+        await climateIcon.click();
+
+        let el7 = await driver.$("android:id/text1");
+        await el7.click();
+        let el8 = await driver.$("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[12]");
+        await el8.click();
+        let el9 = await driver.$("~climate-submit");
+        await el9.click();
+        let el10 = await driver.$("//android.widget.Button[@content-desc=\"Homepage, back\"]/android.widget.ImageView");
+        await el10.click();
+        let el11 = await driver.$("~refresh-button");
+        await el11.click();
         
-        const lockIcon = await $('~lock-icon-button');
-        const lockUnlockButton = await $('~lock-unlock-button');
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    });
+});
+
+/*
+const lockUnlockButton = await $('~lock-unlock-button');
+
         const lockUnlockStatus = await $('~lock-unlock-status');
         const lockUnlockButtonStatus = await $('~lock-unlock-button-status');
 
@@ -91,5 +118,5 @@ describe('Lock/Unlock button test', () => {
         } else {
             throw new Error('The initial status is inconsistent. Please check the app.');
         }
-    });
-});
+*/
+
