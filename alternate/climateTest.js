@@ -28,18 +28,22 @@ describe('Climate Control Test', () => {
     it('Turns climate control on', async () => {
         await browser.pause(3000);
 
-        let climateIcon = await driver.$("~climate-icon-button");
+        const climateIcon = await $("~climate-icon-button");
         await climateIcon.click();
 
-        let el7 = await driver.$("android:id/text1");
+        const el7 = await $("android:id/text1");
         await el7.click();
-        let el8 = await driver.$("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[12]");
+        
+        const el8 = await $("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[12]");
         await el8.click();
-        let el9 = await driver.$("~climate-submit");
+
+        const el9 = await $("~climate-submit");
         await el9.click();
-        let el10 = await driver.$("//android.widget.Button[@content-desc=\"Homepage, back\"]/android.widget.ImageView");
+
+        const el10 = await $("//android.widget.Button[@content-desc=\"Homepage, back\"]/android.widget.ImageView");
         await el10.click();
-        let el11 = await driver.$("~refresh-button");
+
+        const el11 = await $("~refresh-button");
         await el11.click();
         
         
