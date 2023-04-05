@@ -12,7 +12,7 @@ const DiscoverScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {articles.map((article, index) => (
-        <Article key={index} title={article.title} videoId={article.videoId} />
+        <Article key={index} title={article.title} videoId={article.videoId}/>
       ))}
     </ScrollView>
   );
