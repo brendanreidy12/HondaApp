@@ -55,6 +55,8 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
+
+
     capabilities: [{
         platformName:"android",
         deviceName:"emulator-5554",
@@ -72,9 +74,22 @@ exports.config = {
         nativeWebScreenshot:true,
         connectHardwareKeyboard:true,
     }],
-    
 
-
+/*
+    capabilities: [{
+        platformName:"iOS",
+        platformversion: "16.2",
+        deviceName:"iPhone SE 2",
+        automationName:"XCUITest",
+        bundleId:"host.exp.Exponent",
+        appWaitForLaunch:true,
+        newCommandTimeout:180,
+        skipLogcatCapture:true,
+        ensureWebviewsHavePages:true,
+        nativeWebScreenshot:true,
+        connectHardwareKeyboard:true,
+    }],
+*/
 
     //
     // ===================
