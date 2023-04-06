@@ -93,6 +93,7 @@ app.get('/range', (req, res) => {
   res.json({ range: car.range });
 });
 
+//For sending test Range Value in Postman
 app.post('/setRange', (req, res) => {
   const newRange = req.body.range;
   if (typeof newRange === 'number' && newRange >= 0 && newRange <= 120) {

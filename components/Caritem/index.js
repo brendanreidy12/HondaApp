@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import CenterImage from '../CenterCar';
 
+const baseURL = Platform.OS === 'android' ? 'http://10.0.2.2:3000' : 'http://localhost:3000';
+
 const CarItem = ({ locked, climateOn, fetchLockStatus, fetchClimateStatus }) => {
   const navigation = useNavigation();
-  
+
   const [range, setRange] = useState(null);
 
   useEffect(() => {
@@ -16,7 +18,7 @@ const CarItem = ({ locked, climateOn, fetchLockStatus, fetchClimateStatus }) => 
   }, []);
 
   const fetchRange = () => {
-    axios.get('http://10.0.2.2:3000/range')
+    axios.get(`${baseURL}/range`)
       .then(response => {
         setRange(response.data.range);
       })
@@ -31,6 +33,14 @@ const CarItem = ({ locked, climateOn, fetchLockStatus, fetchClimateStatus }) => 
     return 'white';
   };
 
+  const getButtonStyle = (isActive) => {
+    return isActive ? { backgroundColor: 'white', borderColor: 'black', borderWidth: 1 } : null;
+  };
+
+  const getIconColor = (isActive) => {
+    return isActive ? 'red' : 'black';
+  };
+
   return (
     <View style={styles.carContainer}>
       <View style={styles.topContainer}>
@@ -41,7 +51,7 @@ const CarItem = ({ locked, climateOn, fetchLockStatus, fetchClimateStatus }) => 
           onPress={() => {
             fetchLockStatus();
             fetchClimateStatus();
-            fetchRange(); // Add this line
+            fetchRange();
           }}
           accessible={true}
           accessibilityLabel="refresh-button"
@@ -62,7 +72,7 @@ const CarItem = ({ locked, climateOn, fetchLockStatus, fetchClimateStatus }) => 
         <TouchableOpacity
           style={[
             styles.circularButton,
-            climateOn ? { backgroundColor: 'white', borderColor: 'black', borderWidth: 1 } : null,
+            getButtonStyle(climateOn)
           ]}
           onPress={() => navigation.navigate('ClimateControl')}
           accessible={true}
@@ -72,13 +82,13 @@ const CarItem = ({ locked, climateOn, fetchLockStatus, fetchClimateStatus }) => 
           <Icon
             name="snowflake-o"
             size={60}
-            color={climateOn ? 'red' : 'black'}
+            color={getIconColor(climateOn)}
           />
         </TouchableOpacity>
         <TouchableOpacity
           style={[
             styles.circularButton,
-            !locked ? { backgroundColor: 'white', borderColor: 'black', borderWidth: 1 } : null,
+            getButtonStyle(!locked)
           ]}
           onPress={() => navigation.navigate('LockScreen')}
           accessible={true}
@@ -88,7 +98,7 @@ const CarItem = ({ locked, climateOn, fetchLockStatus, fetchClimateStatus }) => 
           <Icon
             name={locked ? 'lock' : 'unlock'}
             size={60}
-            color={!locked ? 'red' : 'black'}
+            color={getIconColor(!locked)}
           />
         </TouchableOpacity>
       </View>
@@ -98,3 +108,4 @@ const CarItem = ({ locked, climateOn, fetchLockStatus, fetchClimateStatus }) => 
 };
 
 export default CarItem;
+

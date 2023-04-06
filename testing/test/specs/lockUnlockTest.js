@@ -3,7 +3,7 @@ const assert = require('assert');
 //Setup App for testing
 describe('Specific element test', () => {
     it('Expo Set-up - App opened in config, this inputs project URL, opens app, and closes pop up', async () => {
-        await browser.pause(15000);
+        await browser.pause(5000);
         const selector = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup";
 
         const el1 = await $(selector);
@@ -13,7 +13,7 @@ describe('Specific element test', () => {
 
         const el2 = await $(selector2);
         await el2.click();
-        await el2.setValue("exp://192.168.239.220:19000");
+        await el2.setValue("exp://172.16.3.127:19000");
 
         const selector3 = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup[2]/android.view.ViewGroup[2]/android.view.ViewGroup";
 
@@ -38,6 +38,9 @@ describe('Lock/Unlock button test', () => {
         const lockUnlockButton = await $('~lock-unlock-button');
         const lockUnlockStatus = await $('~lock-unlock-status');
         const lockUnlockButtonStatus = await $('~lock-unlock-button-status');
+        
+        const backButton1 = "//android.widget.Button[@content-desc=\"Homepage, back\"]/android.widget.ImageView";
+        const lockBackButton= await $(backButton1);
 
         //Ensures tests don't start until main screen UI loaded
         await lockIcon.waitForDisplayed();
@@ -80,7 +83,10 @@ describe('Lock/Unlock button test', () => {
             const newLockStatusTest2 = await lockUnlockStatus.getText();
             assert.strictEqual(newButtonStatusTest2, 'LOCK');
             assert.strictEqual(newLockStatusTest2, 'THE CAR IS UNLOCKED');
-            console.log('Test Complete')
+            console.log('Test Complete, returning to Main Page in 3s')
+
+            await browser.pause(3000);
+            await lockBackButton.click();
 
         } else if (initialButtonStatus === 'UNLOCK' && initialLockStatus === 'THE CAR IS LOCKED') {
             await lockUnlockButton.click();
@@ -104,9 +110,52 @@ describe('Lock/Unlock button test', () => {
             const newLockStatusTest2 = await lockUnlockStatus.getText();
             assert.strictEqual(newButtonStatusTest2, 'UNLOCK');
             assert.strictEqual(newLockStatusTest2, 'THE CAR IS LOCKED');
-            console.log('Test complete')
+            console.log('Test complete, returning to Main Page in 3s')
+
+            await browser.pause(3000);
+            await lockBackButton.click();
+
         } else {
             throw new Error('The initial status is inconsistent. Please check the app.');
         }
+    });
+});
+
+//Start Climate Control Test
+describe('Climate Control Test', () => {
+    it('Turns climate control on', async () => {
+        await browser.pause(3000);
+
+        const climateIcon = await $("~climate-icon-button");
+        await climateIcon.click();
+
+        const el7 = await $("android:id/text1");
+        await el7.click();
+        
+        const el8 = await $("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.appcompat.widget.LinearLayoutCompat/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[12]");
+        await el8.click();
+
+        const el9 = await $("~climate-submit");
+        await el9.click();
+
+        const el10 = await $("//android.widget.Button[@content-desc=\"Homepage, back\"]/android.widget.ImageView");
+        await el10.click();
+
+        const el11 = await $("~refresh-button");
+        await el11.click();
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     });
 });
