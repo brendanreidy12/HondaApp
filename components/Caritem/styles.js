@@ -60,6 +60,14 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
       },
+      rangeContainer: {
+        paddingTop: 10,
+        paddingBottom: 10,
+      },
+      rangeText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+      },
 });
 
 export default styles;

@@ -9,6 +9,7 @@ let car = {
   climateOn: true,
   temperature: 18,
   climateTimeRemaining: 10,
+  range: 50,
 };
 
 app.post('/lock', (req, res) => {
@@ -83,6 +84,23 @@ function climateStop() {
 app.post('/climatestop', (req, res) => {
   climateStop();
   res.json(car);
+});
+
+const getRandomRange = () => Math.floor(Math.random() * 121);
+
+app.get('/range', (req, res) => {
+  car.range = getRandomRange();
+  res.json({ range: car.range });
+});
+
+app.post('/setRange', (req, res) => {
+  const newRange = req.body.range;
+  if (typeof newRange === 'number' && newRange >= 0 && newRange <= 120) {
+    car.range = newRange;
+    res.json({ success: true, range: car.range });
+  } else {
+    res.status(400).json({ success: false, message: 'Invalid range value. Allowed values are between 0 and 120.' });
+  }
 });
 
 app.listen(3000, () => {
