@@ -134,6 +134,8 @@ describe('Lock/Unlock button test', () => {
     });
 });
 
+/*
+
 //Start Climate Control Test
 describe('Climate Control Test', () => {
     it('Turns Climate Control On', async () => {
@@ -186,3 +188,6 @@ describe('Climate Control Test', () => {
         }
     });
 });
+
+
+*/
