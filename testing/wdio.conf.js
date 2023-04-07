@@ -36,10 +36,10 @@ exports.config = {
         },
         {
             platformName: "iOS",
-            platformVersion: "15.0", // Update this to match your iOS emulator version
-            deviceName: "iPhone 13", // Update this to match your iOS emulator device
+            platformVersion: "16.2", // Update this to match your iOS emulator version
+            deviceName: "iPhone SE 2", // Update this to match your iOS emulator device
             automationName: "XCUITest",
-            app: "path/to/your/Expo.app", // Update this to the path of your Expo iOS app
+            bundleId: "host.exp.Exponent", // Bundle ID for Expo Go app on iOS
             noReset: true,
             newCommandTimeout: 180,
             connectHardwareKeyboard: true,
