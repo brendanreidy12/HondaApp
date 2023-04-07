@@ -63,7 +63,7 @@ const CarItem = ({ locked, climateOn, fetchLockStatus, fetchClimateStatus }) => 
           />
         </TouchableOpacity>
         <View style={styles.rangeContainer}>
-          <Text style={[styles.rangeText, { color: getRangeColor() }]}>
+          <Text accessibilityLabel='range' style={[styles.rangeText, { color: getRangeColor() }]}>
             Range: {range} miles
           </Text>
         </View>

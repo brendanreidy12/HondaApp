@@ -16,24 +16,36 @@ exports.config = {
 
     maxInstances: 10,
 
-    capabilities: [{
-        platformName:"android",
-        deviceName:"emulator-5554",
-        automationName:"UiAutomator2",
-        appPackage:"host.exp.exponent",
-        appActivity:"host.exp.exponent.experience.HomeActivity",
-        appWaitActivity:"host.exp.exponent.experience.HomeActivity",
-        intentAction:"android.intent.action.MAIN",
-        appWaitForLaunch:true,
-        newCommandTimeout:180,
-        uiautomator2ServerInstallTimeout:100000,
-        adbExecTimeout:1000000,
-        skipLogcatCapture:true,
-        ensureWebviewsHavePages:true,
-        nativeWebScreenshot:true,
-        connectHardwareKeyboard:true,
-    }],
-
+    capabilities: [
+        {
+            platformName: "android",
+            deviceName: "emulator-5554",
+            automationName: "UiAutomator2",
+            appPackage: "host.exp.exponent",
+            appActivity: "host.exp.exponent.experience.HomeActivity",
+            appWaitActivity: "host.exp.exponent.experience.HomeActivity",
+            intentAction: "android.intent.action.MAIN",
+            appWaitForLaunch: true,
+            newCommandTimeout: 180,
+            uiautomator2ServerInstallTimeout: 100000,
+            adbExecTimeout: 1000000,
+            skipLogcatCapture: true,
+            ensureWebviewsHavePages: true,
+            nativeWebScreenshot: true,
+            connectHardwareKeyboard: true,
+        },
+        {
+            platformName: "iOS",
+            platformVersion: "15.0", // Update this to match your iOS emulator version
+            deviceName: "iPhone 13", // Update this to match your iOS emulator device
+            automationName: "XCUITest",
+            app: "path/to/your/Expo.app", // Update this to the path of your Expo iOS app
+            noReset: true,
+            newCommandTimeout: 180,
+            connectHardwareKeyboard: true,
+            nativeWebTap: true,
+            webDriverAgentUrl: "http://localhost:8100",
+        }],
 /*
     capabilities: [{
         platformName:"iOS",
