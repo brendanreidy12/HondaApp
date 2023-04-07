@@ -1,3 +1,5 @@
+//Caritem/index.js
+
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -32,6 +34,8 @@ const CarItem = ({ locked, climateOn, fetchLockStatus, fetchClimateStatus }) => 
     if (range >= 21 && range <= 35) return 'orange';
     return 'white';
   };
+  
+  const rangeColor = getRangeColor();
 
   const getButtonStyle = (isActive) => {
     return isActive ? { backgroundColor: 'white', borderColor: 'black', borderWidth: 1 } : null;
@@ -63,7 +67,7 @@ const CarItem = ({ locked, climateOn, fetchLockStatus, fetchClimateStatus }) => 
           />
         </TouchableOpacity>
         <View style={styles.rangeContainer}>
-          <Text accessibilityLabel='range' style={[styles.rangeText, { color: getRangeColor() }]}>
+          <Text accessibilityLabel={`range-${rangeColor}`} style={[styles.rangeText, { color: rangeColor }]}>
             Range: {range} miles
           </Text>
         </View>

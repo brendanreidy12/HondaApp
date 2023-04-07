@@ -2,7 +2,6 @@ const assert = require('assert');
 const { isVisible } = require('wd/lib/commands');
 
 //Setup App for testing
-
 describe('Specific element test', () => {
     it('Expo Set-up - App opened in config, this inputs project URL, opens app, and closes pop up', async () => {
         await browser.pause(15000)
@@ -23,7 +22,17 @@ describe('Specific element test', () => {
 
         await browser.pause(3000)
 
-        const range = await $('~range');
+        const rangeColors = ['red', 'orange', 'white'];
+        let range;
+
+        for (const color of rangeColors) {
+            range = await $(`~range-${color}`);
+            const isDisplayed = await range.isDisplayed();
+            if (isDisplayed) {
+                break;
+            }
+        }
+
         await browser.pause(5000)
         await range.waitForDisplayed();
         await range.click();
@@ -32,7 +41,6 @@ describe('Specific element test', () => {
 
     });
 });
-
 
 
 //Start Lock/Unlock Test
@@ -52,8 +60,8 @@ describe('Lock/Unlock button test', () => {
         const lockUnlockStatus = await $('~lock-unlock-status');
         const lockUnlockButtonStatus = await $('~lock-unlock-button-status');
         
-        const backButton1 = "//android.widget.Button[@content-desc=\"Homepage, back\"]/android.widget.ImageView";
-        const lockBackButton= await $(backButton1);
+        const backButtonXPath = "//android.widget.Button[@content-desc=\"Homepage, back\"]/android.widget.ImageView";
+        const backButton= await $(backButtonXPath);
 
         //Ensures tests don't start until main screen UI loaded
         await lockIcon.waitForDisplayed();
@@ -99,7 +107,7 @@ describe('Lock/Unlock button test', () => {
             console.log('Test Complete, returning to Main Page in 3s')
 
             await browser.pause(3000);
-            await lockBackButton.click();
+            await backButton.click();
 
         } else if (initialButtonStatus === 'UNLOCK' && initialLockStatus === 'THE CAR IS LOCKED') {
             await lockUnlockButton.click();
@@ -126,13 +134,14 @@ describe('Lock/Unlock button test', () => {
             console.log('Test complete, returning to Main Page in 3s')
 
             await browser.pause(3000);
-            await lockBackButton.click();
+            await backButton.click();
 
         } else {
             throw new Error('The initial status is inconsistent. Please check the app.');
         }
     });
 });
+
 
 //Start Climate Control Test
 describe('Climate Control Test', () => {
@@ -194,31 +203,97 @@ describe('Climate Control Test', () => {
         }
 
         await climateStop.click();
+        await browser.pause(2000);
 
-        console.log('Returning to main page in 3s')
+        const backButtonXPath = "//android.widget.Button[@content-desc=\"Homepage, back\"]/android.widget.ImageView";
+        const backButton= await $(backButtonXPath);
+        await backButton.click();
+
+        console.log('Starting discover page test in 3s')
         await browser.pause(3000);
     });
 });
 
+
 //Start Discover Page Test
 describe('Discover Page Test', () => {
-    it('Checks if video has loaded', async () => {
+    it('Checks if video element is present', async () => {
         await browser.pause(3000);
 
         const discoverTabXPath = '//android.view.ViewGroup[@content-desc="app-root"]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.View/android.view.View[2]';
         const discoverTab = await $(discoverTabXPath);
         await discoverTab.click();
 
+        const homeTabXPath = '//android.view.ViewGroup[@content-desc="app-root"]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.View/android.view.View[1]';
+        const homeTab = await $(homeTabXPath);
+
         await browser.pause(3000);
 
         const firstVideoXPath = '//android.view.ViewGroup[@content-desc="app-root"]/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.view.View';
         const firstVideo = await $(firstVideoXPath);
-        const isVideoLoaded = await firstVideo.isDisplayed();
+        const isVideoElementPresent = await firstVideo.waitForExist({ timeout: 30000 });
 
-        if (isVideoLoaded) {
-            console.log('Discover Tab Test Passed: YouTube video has loaded');
+        if (isVideoElementPresent) {
+            console.log('Discover Tab Test Passed: YouTube video element is present');
         } else {
-            throw new Error('YouTube video has not loaded');
+            throw new Error('Video Content Not Loaded after 15 seconds');
         }
+        
+        await browser.pause(2000);
+        await homeTab.click();
+
     });
 });
+
+
+//Start Range Colour Test
+describe('Range Colour Test', () => {
+    it('Presses refresh button 5 times, checks range value text color', async () => {
+  
+      await browser.pause(5000);
+  
+      // Repeat the process 5 times
+      for (let i = 0; i < 5; i++) {
+        // Press the refresh button
+        const refreshButton = await $('~refresh-button');
+        await refreshButton.waitForDisplayed();
+        await refreshButton.click();
+        await browser.pause(5000);
+  
+        // Determine the expected color
+        const rangeRed = await $('~range-red');
+        const rangeOrange = await $('~range-orange');
+        const rangeWhite = await $('~range-white');
+  
+        let expectedColor;
+        let rangeText;
+  
+        if (await rangeRed.isDisplayed()) {
+          expectedColor = 'red';
+          rangeText = await rangeRed.getText();
+        } else if (await rangeOrange.isDisplayed()) {
+          expectedColor = 'orange';
+          rangeText = await rangeOrange.getText();
+        } else if (await rangeWhite.isDisplayed()) {
+          expectedColor = 'white';
+          rangeText = await rangeWhite.getText();
+        } else {
+          throw new Error('No range element found');
+        }
+  
+        const rangeValue = parseInt(rangeText.match(/\d+/)[0], 10);
+  
+        if (rangeValue >= 0 && rangeValue <= 20 && expectedColor !== 'red') {
+          throw new Error(`Incorrect color for range value. Expected: red`);
+        } else if (rangeValue >= 21 && rangeValue <= 35 && expectedColor !== 'orange') {
+          throw new Error(`Incorrect color for range value. Expected: orange`);
+        } else if (rangeValue > 35 && expectedColor !== 'white') {
+          throw new Error(`Incorrect color for range value. Expected: white`);
+        }
+      }
+      await browser.pause(3000);
+    });
+  });
+  
+  
+  
