@@ -44,7 +44,7 @@ exports.config = {
             newCommandTimeout: 180,
             connectHardwareKeyboard: true,
             nativeWebTap: true,
-            webDriverAgentUrl: "http://localhost:8100",
+            //webDriverAgentUrl: "http://127.0.0.1:8100",
         }],
 /*
     capabilities: [{
