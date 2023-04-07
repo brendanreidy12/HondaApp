@@ -2,7 +2,7 @@ exports.config = {
     runner: 'local',
     
     protocol: 'http',
-    hostname: '0.0.0.0',
+    hostname: '127.0.0.1',
     port: 4723,
     path: 'wd/hub',
     
