@@ -4,7 +4,7 @@ import { WebView } from 'react-native-webview';
 
 const Article = ({ title, videoId }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} accessibilityLabel='discover-view'>
       <WebView
         accessibilityLabel='discover-video'
         style={styles.video}

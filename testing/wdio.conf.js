@@ -33,7 +33,10 @@ exports.config = {
             ensureWebviewsHavePages: true,
             nativeWebScreenshot: true,
             connectHardwareKeyboard: true,
-        },
+        }],
+       
+       /*
+       
         {
             platformName: "iOS",
             platformVersion: "16.2", // Update this to match your iOS emulator version
@@ -46,7 +49,7 @@ exports.config = {
             nativeWebTap: true,
             //webDriverAgentUrl: "http://127.0.0.1:8100",
         }],
-/*
+
     capabilities: [{
         platformName:"iOS",
         platformversion: "16.2",

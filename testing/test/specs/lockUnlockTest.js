@@ -134,60 +134,91 @@ describe('Lock/Unlock button test', () => {
     });
 });
 
-/*
-
 //Start Climate Control Test
 describe('Climate Control Test', () => {
-    it('Turns Climate Control On', async () => {
+    it('Turns Climate Control On and Off', async () => {
         await browser.pause(3000);
-        
+
         const climateIcon = await $('~climate-icon-button');
         await climateIcon.click();
 
         const tempSet19  = await $('~temp-19');
         const timeSet30 = await $('~Set time to 30 minutes');
-        const climateSubmit = await driver.$("~climate-submit");
+        const climateSubmit = await $('~climate-submit');
+        const climateStop = await $('~climate-stop');
 
         const climateStatus = await $('~climate-status');
-        
+
         await browser.pause(3000);
-        
-        const initialClimateStatus = await climateStatus.getText();
 
-        if (climateSubmit.isVisible) {
+        const isSubmitButtonVisible = await climateSubmit.isDisplayed();
 
-            await lockUnlockButton.click();
-
-            await browser.pause(3000);
-
-            const climateIcon = await $("~climate-icon-button");
-            await climateIcon.click();
-    
-            await browser.pause(3000);
-    
+        if (isSubmitButtonVisible) {
+            // The submit button is visible, run the test case
             await tempSet19.waitForDisplayed();
             await tempSet19.click();
-    
+
             await browser.pause(2000);
-    
+
             await timeSet30.click();
-    
+
             await browser.pause(2000);
-    
+
             await climateSubmit.click();
 
             await browser.pause(10000);
+        } else {
+            // The submit button is not visible, press the "climate-stop" button before running the test
+            await climateStop.click();
+            await browser.pause(3000);
 
-        } else if (initialClimateStatus === 'Climate is on') {
+            await tempSet19.waitForDisplayed();
+            await tempSet19.click();
 
+            await browser.pause(2000);
 
+            await timeSet30.click();
 
+            await browser.pause(2000);
 
+            await climateSubmit.click();
+
+            await browser.pause(10000);
+        }
+
+        const updatedClimateStatus = await climateStatus.getText();
+        if (updatedClimateStatus === 'Climate is on') {
+            console.log('Climate Control Test Passed');
         } else {
             throw new Error('Climate not working as expected');
         }
+
+        await climateStop.click();
+
+        console.log('Returning to main page in 3s')
+        await browser.pause(3000);
     });
 });
 
+//Start Discover Page Test
+describe('Discover Page Test', () => {
+    it('Checks if video has loaded', async () => {
+        await browser.pause(3000);
 
-*/
+        const discoverTabXPath = '//android.view.ViewGroup[@content-desc="app-root"]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.View/android.view.View[2]';
+        const discoverTab = await $(discoverTabXPath);
+        await discoverTab.click();
+
+        await browser.pause(3000);
+
+        const firstVideoXPath = '//android.view.ViewGroup[@content-desc="app-root"]/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View[3]/android.view.View';
+        const firstVideo = await $(firstVideoXPath);
+        const isVideoLoaded = await firstVideo.isDisplayed();
+
+        if (isVideoLoaded) {
+            console.log('Discover Tab Test Passed: YouTube video has loaded');
+        } else {
+            throw new Error('YouTube video has not loaded');
+        }
+    });
+});
