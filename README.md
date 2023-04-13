@@ -5,10 +5,10 @@ Commands to start:
 Start Expo Server: In ./HondaApp, run 'npx expo start'
 Start API Server: In ./HondaApp, run node 'node ./components/DoorStatusAPI/lockUnlockAPI.js'
 
-Also requires:
+Also run:
 
-npm install express
+npm install
 
-npm install axios
+To install all required dependencies.
 
-Now working with Appium on Fedora Workstation with Android 12.
+Now working with Appium on Fedora Workstation with Android 12 virtual device.
